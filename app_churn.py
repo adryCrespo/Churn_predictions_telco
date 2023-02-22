@@ -12,12 +12,12 @@ from streamlit_echarts import st_echarts
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
-from xgboost import XGBClassifier
-
+#from xgboost import XGBClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
-
+import pickle
 #CONFIGURACION DE LA PÁGINA
 st.set_page_config(
      page_title = 'prediccion baja cliente',
@@ -29,14 +29,14 @@ st.set_page_config(
 def get_df_estados():
     ruta_pipe_state =  'st_folder/df_estados.pickle'
     with open(ruta_pipe_state, mode='rb') as file:
-       df_estados = cloudpickle.load(file)  
+       df_estados = pickle.load(file)  
     return df_estados
     
 # get pipeline 
 def get_pipeline():
-    ruta_pipe_ejecucion = 'st_folder/' +'pipe_ejecucion.pickle'
+    ruta_pipe_ejecucion = 'st_folder/' +'pipe_ejecucion3.pickle'
     with open(ruta_pipe_ejecucion, mode='rb') as file:
-        pipe_ejecucion = cloudpickle.load(file)
+        pipe_ejecucion = pickle.load(file)
     return pipe_ejecucion
  
 # INICIAR VARIABLES 
