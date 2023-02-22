@@ -27,14 +27,14 @@ st.set_page_config(
 
 # get datos 
 def get_df_estados():
-    ruta_pipe_state =  './st_folder/df_estados.pickle'
+    ruta_pipe_state =  './df_estados.pickle'
     with open(ruta_pipe_state, mode='rb') as file:
        df_estados = cloudpickle.load(file)  
     return df_estados
     
 # get pipeline 
 def get_pipeline():
-    ruta_pipe_ejecucion = './st_folder/' +'pipe_ejecucion.pickle'
+    ruta_pipe_ejecucion = './' +'pipe_ejecucion.pickle'
     with open(ruta_pipe_ejecucion, mode='rb') as file:
         pipe_ejecucion = cloudpickle.load(file)
     return pipe_ejecucion
@@ -84,7 +84,7 @@ mapUSA = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, t
 custom_scale = (df_estados['valores'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
 
 choropleth =folium.Choropleth(
-            geo_data=r'./st_folder/us-state-boundaries.geojson',
+            geo_data=r'./us-state-boundaries.geojson',
             data=df_estados,
             columns=['state_name', 'valores'], 
             key_on='feature.properties.name', 
