@@ -32,31 +32,16 @@ st.set_page_config(
      
 
 
-#@st.cache()
+# get datos 
 def get_df_estados():
-    
-    #diccionario
-    dict_real_state = 'diccionario_state.pickle'
-    ruta_pipe_state = './data/' + dict_real_state
+    ruta_pipe_state =  './df_estados.pickle'
     with open(ruta_pipe_state, mode='rb') as file:
-       medias_dict = cloudpickle.load(file)  
+       df_estados = cloudpickle.load(file)  
+    return df_estados
     
-    abrev = list(medias_dict.keys() )
-    valores = list(medias_dict.values() )
-    df_dict = pd.DataFrame({'Abbreviation':abrev,'valores':valores})
-    
-    #diccionario
-    dict_real_state = 'lista_estados.pickle'
-    ruta_pipe_state = './data/' + dict_real_state
-    with open(ruta_pipe_state, mode='rb') as file:
-       lista_estados = cloudpickle.load(file) 
-    
-    df_estados = lista_estados.reset_index().merge(df_dict, how='left', on='Abbreviation')
-    return df_estados.rename(columns={'State Name':'state_name'})
-    
-#@st.cache()
+# get pipeline 
 def get_pipeline():
-    ruta_pipe_ejecucion = './data/' +'pipe_ejecucion.pickle'
+    ruta_pipe_ejecucion = './' +'pipe_ejecucion.pickle'
     with open(ruta_pipe_ejecucion, mode='rb') as file:
         pipe_ejecucion = cloudpickle.load(file)
     return pipe_ejecucion
@@ -106,10 +91,10 @@ mapUSA = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, t
 custom_scale = (df_estados['valores'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
 
 choropleth =folium.Choropleth(
-            geo_data=r'./data/us-state-boundaries.geojson',
+            geo_data=r'./us-state-boundaries.geojson',
             data=df_estados,
-            columns=['state_name', 'valores'],  #Here we tell folium to get the county fips and plot new_cases_7days metric for each county
-            key_on='feature.properties.name', #Here we grab the geometries/county boundaries from the geojson file using the key 'coty_code' which is the same as county fips
+            columns=['state_name', 'valores'], 
+            key_on='feature.properties.name', 
             threshold_scale=custom_scale ,
             legend_name='New Cases Past 7 Days (Per 100K Population) '
             )
