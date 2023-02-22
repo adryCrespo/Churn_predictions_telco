@@ -84,7 +84,7 @@ mapUSA = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, t
 custom_scale = (df_estados['valores'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
 
 choropleth =folium.Choropleth(
-            geo_data=r'/st_folder/us-state-boundaries.geojson',
+            geo_data=r'st_folder/us-state-boundaries.geojson',
             data=df_estados,
             columns=['state_name', 'valores'], 
             key_on='feature.properties.name', 

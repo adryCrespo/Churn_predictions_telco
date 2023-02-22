@@ -105,7 +105,7 @@ choropleth.geojson.add_child(
 #CONFIGURACION MODELO
 new_attrs = ['grow_policy', 'max_bin', 'eval_metric', 'callbacks', 
 'early_stopping_rounds', 'max_cat_to_onehot', 'max_leaves', 'sampling_method',
- 'feature_types','max_cat_threshold']
+ 'feature_types','max_cat_threshold','_name_to_fitted_passthrough']
 
 for attr in new_attrs:
     setattr(pipe_ejecucion[1], attr, None)
