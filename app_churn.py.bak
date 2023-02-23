@@ -6,7 +6,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import folium
 from streamlit_folium import st_folium
-import cloudpickle
+import pickle
 from streamlit_echarts import st_echarts
 
 from sklearn.preprocessing import StandardScaler
