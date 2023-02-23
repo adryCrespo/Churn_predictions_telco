@@ -21,6 +21,7 @@ from sklearn.pipeline import make_pipeline
 #CONFIGURACION DE LA PÁGINA
 st.set_page_config(
      page_title = 'prediccion baja cliente',
+     page_icon = 'st_folder/tfno.jpg',
      layout = 'wide')
      
 
@@ -51,6 +52,13 @@ pipe_ejecucion = get_pipeline()
                         
 #SIDEBAR
 with st.sidebar:
+    
+    #col1 , col2 = st.columns(2)
+    st.image('st_folder/tfno2.jpeg')
+    st.markdown(' **INFORMACION CLIENTE**  ')
+    #col2.write(" INFORMACION")
+    #col2.write(" CLIENTE")
+    
     international_plan = st.selectbox('international_plan:',['yes','no'])
     voice_mail_plan = st.selectbox('voice_mail_plan:',['yes','no'])
     number_customer_service_calls = st.slider('numero de llamadas a servicio al cliente: ', 0, 4,0)
@@ -77,6 +85,8 @@ registro = pd.DataFrame({'international_plan':international_plan,
 
 #MAPA
 st.title('Prediccion de baja de clientes')
+
+
 
 st.write("Selecciona un estado en el mapa")
 mapUSA = folium.Map(location=[38, -96.5], zoom_start=4, scrollWheelZoom=False, tiles='CartoDB positron')
@@ -111,9 +121,10 @@ for attr in new_attrs:
     setattr(pipe_ejecucion[1], attr, None)
 
 # MAIN
-
-st_map = st_folium(mapUSA, width=700, height=450)
-state_name = ''
+col1 , col2 = st.columns(2)
+with col1:
+    st_map = st_folium(mapUSA, width=700, height=450)
+    state_name = ''
 if st_map['last_active_drawing']:
         state_name = st_map['last_active_drawing']['properties']['name']
         y =  df_index.loc[state_name, ['valores']][0]
@@ -144,8 +155,15 @@ ead_options = {
 
 
 # datos
-st.write("Estado seleccionado: "+ state_name if state_name in lista else "Estado no seleccionado")
-st.write("Probabilidad de salida del cliente: " +str(round(x,2))+"%"  )
-st_echarts(options=ead_options, width="110%", key=1)
 
-st.dataframe(registro)
+with col2:
+    st_echarts(options=ead_options, width="110%", key=1)
+    
+    mssg_1 = "Estado seleccionado: "+ state_name if state_name in lista else "Estado no seleccionado"
+    st.markdown(f"""<p class="a" style="text-align: center;">{mssg_1}</p>""", unsafe_allow_html=True)
+    mssg = "Probabilidad de salida del cliente: " +str(round(x,2))+"%"  
+    html_str = f"""  <p class="a" style="text-align: center;">{mssg}</p>"""
+            
+    st.markdown(html_str, unsafe_allow_html=True)
+
+#st.dataframe(registro)
