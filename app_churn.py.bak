@@ -12,8 +12,8 @@ from streamlit_echarts import st_echarts
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
-#from xgboost import XGBClassifier
-from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+#from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
@@ -34,7 +34,7 @@ def get_df_estados():
     
 # get pipeline 
 def get_pipeline():
-    ruta_pipe_ejecucion = 'st_folder/' +'pipe_ejecucion3.pickle'
+    ruta_pipe_ejecucion = 'st_folder/' +'pipe_ejecucion.pickle'
     with open(ruta_pipe_ejecucion, mode='rb') as file:
         pipe_ejecucion = pickle.load(file)
     return pipe_ejecucion

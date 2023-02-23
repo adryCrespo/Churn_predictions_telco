@@ -13,11 +13,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline
 from xgboost import XGBClassifier
-#from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
-import pickle
+
+
 #CONFIGURACION DE LA PÁGINA
 st.set_page_config(
      page_title = 'prediccion baja cliente',
