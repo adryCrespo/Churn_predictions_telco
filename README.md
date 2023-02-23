@@ -21,7 +21,7 @@ He realizado una exploracion de datos, para mejorar mi conocimiento del dataset 
 -  Si el **numero de servicio de llamadas** es igual a 4 o superior se dispara la probabilidad de dejar la compañia
 -  El **estado** en el que vive el cliente influye mucho en la probabilidad de baja en la compañia
 
-Para ver estos resultados con más detenimiento ver el  notebook Target EDA
+Para ver estos resultados con más detenimiento ver el  notebook "Target EDA.ipynb"
 
 ## Modelo 
 He visto probado diferentes algoritmos pero el mejor es que ha funcionado es XGBOOST con un grid search. 
@@ -34,9 +34,13 @@ Además, he realizado winsorizacion a algunas de las variables númericas para t
 Como he comentado anteriormente, he elegido el algoritmo con un grid search usando auc-roc como métrica evaluadora. Para tratar el desambalaceo de los datos he usado una estragia de penalizacion por peso en contra parte de realizar la estrategia estandar de remuestreo.
 Por usabilidad, he implementado un pipeline con todas las transformaciones y el modelo y la he cargado en un archivo pickle.
 
+Para ver los detalles, ver el notebook "codigo productivo.ipynb"
 
 ## App streamlit
+Se ha creado una webapp con el paque te streamlit. Esta aplicacion usa el pipeline con el modelo y sus transformaciones para realizar las predicciones.
 La [aplicacion](https://adrycrespo-churn-predictions-telco-app-churn-i0rbfx.streamlit.app/) se ha publicado en el servidor de streamlit.
 
 En esta aplicación, el usuario mete sus datos de manera manual con pestañas y sliders. En cambio, el estado del usario se selecciona con un mapa interactivo. 
 Este mapa se ha realizado con el paquete folium.
+
+El codigo de la app esta en el archivo "app_churn.py"
